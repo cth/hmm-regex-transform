@@ -1,0 +1,194 @@
+Ph.d. project: Biologically inspired logic-statistic models with constraints
+
+Experiments:
+============
+
+- Survey: Representation of logic-statistic models with constraints
+===================================================================
+
+Exploring the different settings in with we can model different types
+of constraints, e.g. PRISM, Markov Logic Networks etc. With the 
+purpose of finding out how efficiently they can deal with parameter
+learning and inference in the presence of constraints. 
+
+This part will also include a number of practical experiments with
+available frameworks to get a feel of the strengths.
+
+Estimate:
+1-3 months.
+
+- The language of the constraints.
+==================================
+
+How should the constraints be specified. As production rules as in CHR 
+or prolog goals or variables and domains. 
+
+I guess this is ongoing considerations. Depends on the nature of the
+problem I guess.
+
+- Experiment: Gene-finding with constraints.
+============================================
+
+Integrate constraints representing domain knowledge into a simple gene-finder (e.g. 
+gene-mark or similar).
+
+Some constraints could be,
+
+- Guessing the number of genes in genome: e.g. should be between 4000-6000 genes etc.
+- Knowing that certain genes are definitely part of the genome
+- Knowing that something is definitely not a gene
+- Distribution of lengths of genes. 
+
+The idea is that these "constraints" will cause the Viterbi path to change and 
+find other potential genes.
+
+Some constraints may be derived using for instance blast searches. E.g. find all 
+possible genes and align them, to find potential known genes in the genome.
+
+Many of these constraints may impose restrictions on existing model,
+but essentially no change the parameters of the model. There may be 
+a trade-off between doing either. For instance, FAM essentially incorporates
+the constraints by adjusting model parameters. It would still be interesting 
+to explore alternatives. Also, it should be explored in greater depth how
+normalization applies. 
+
+For instance, would it be an advantage to retrain the model after we have 
+incorporated the constraints. How much can we deduce it without retraining?
+
+It also be interesting to impose constraints on the probabilities of the 
+variables of the model, e.g. outcome 1 of variable A should be higher than
+outcome 2 of variable B. What could be encoded using such constraints??
+For instance, if we know that there are more potential start codons which
+do not signal a gene that does signal a gene, this knowledge could be modeled.
+Useful? Don't know - but interesting...  It should be possible to create an EM
+algorithm with a maximization step which stays within the constraints..
+
+Goal:
+Proof-of-concept. See if sensivity/specificity can be improved using this approach.
+
+Estimate:
+Proof of concept: 2 weeks. 
+Work on model continues in conjunction with following experiments.
+
+- Experiment: Constraints with probabilistic confidence measures 
+================================================================
+
+Add confidence measures to constraints in Ex.1. These could be interpreted as the
+probability that the constraint holds. It should be possible to relax the constraint
+given that enough evidence speaks against it.
+
+Best method to integrate such constraints in the model? Several ways to proceed:
+- Model transformation.
+- Inference algorithm. 
+- Soft constraint solving.
+
+Goal: Make it possible to specify week
+
+Estimate:
+1 month, maybe more. 
+
+- Experiment: Interactive gene finding with constraints. 
+========================================================
+
+Interactive version (integrated with jbrowse for instance) of Ex.2. and Ex.3. which 
+would allow the user to pose constraints when seeing the genes found. Manually 
+verify or reject genes. 
+
+Expected results: 
+- Show off
+- Involvement of biologists: To make use of the knowledge of biologists and to evaluate if the tool
+is practically useable by biologists working with gene finding.
+- Perhaps collect some useful heuristics?
+
+Estimate: 
+Proof-of-concept: 2 weeks.
+Evaluation: Harder to estimate, involves other people. Maybe 2-3 weeks..
+
+- Experiment: Constraints as combinator for models.
+===================================================
+
+This will be an experiment which examines how constraints may be used to combine
+multiple models. An obvious example is coordinating HMMs, most likely applied to
+find overlapping genes. Use of for instance, Factorial HMMs,  may also be part of
+this investigation.
+
+Actually, this could be range of experiments, since there are probably many
+types of models to combine. What immediately comes to mind is,
+- Method for overlapping gene-finding, e.g. for instance
+   - Entering a CDS region is conditioned on whether other frames are in CDS regions or not.
+   - Cooperation with an overlap HMM that models codon frequency differences in overlapping regions
+- Different gene-finder approaches: It seems that existing approaches are as simple 
+  as majority votes. We must be able to do better.
+- Gene-finder and phylogenetic trees (possible more than one, generated differently).
+- Specific genefinders (looks for a particular kind of gene)
+  - Explore constraints on gene-cooccurences
+
+Both hard- and soft-constraints will be considered as combinators.
+Soft constraints will really work as a sort of conditioning (or bayesian
+dependencies if you will). For instance, we might condition the presence
+of a particular gene and the phylogenetic distance to organisms having 
+this gene.
+
+Existing models can be either blackbox or whitebox. Whitebox models
+can be analyzed and constraints can be integrated more closely.
+Blackbox models can be included by adaptation constraints.
+
+Expected results: 
+- A state-of-the-art gene-finder.
+- A more elaborate language for specifying these constraints. Probably
+  based on CHR.
+
+Estimate:
+- Prototype/proof-of-concept: 1 month
+- Improvements and elaboration: 1-6 months
+
+Experiment: Learn constraint probabilities.
+===========================================
+
+Explore how to learn confidence measures/probabilistic  significance of 
+constraints on a model. This should be done in the context of a gene-finder
+with constraints which has been developed prior to this experiment (e.g.
+with the purpose of improving it.)
+
+- Automatically deduce the probability of the constraints
+- How much do affect the likelihood (or sensivity/specificity) of the model
+
+Effectively, this may be use for testing a hypothesis expressed by a constraint.
+
+Estimate:
+3 months.
+
+Expected results: 
+- Adapted machine learning algorithms
+- A tool for easy testing of hypothesis about gene-finding.
+
+
+Experiment: Computational trade-offs between deterministic and probabilistic constraints
+========================================================================================
+
+Explore the computational trade-offs between hard and soft constraints
+with regard to learning and inference.
+
+For instance, say we are willing to loose %5 specificity or likelihood by wish to 
+improve parameter learning performance, which probabilistic constraints
+should be made deterministic.
+
+This could/should by done analysis of the model. 
+
+Note to self: Just found nice paper on how to approximate hidden markov models
+with transducers. 
+
+Experiment: Induction of constraints
+====================================
+
+Explore the induction of constraints and their probabilistic significance.
+This is similar to inductive logic programming and transformational learning. 
+
+Considering that in NLP POS tagging, the most successful approaches (Brill) 
+are based on transformational learning, it seems that we should at least explore if we 
+can do something similar with biological sequences and gene-finding.
+
+The combination of parameter learning and constraint learning seems like
+the "right mix". It is also related to the computational trade-offs between
+probabilistic and deterministic models. 
+

@@ -1,0 +1,13 @@
+digraph FA {
+	rankdir=LR
+node [shape = doublecircle]; dfa_s1 dfa_s7 ;
+node [shape = circle];
+	"dfa_s2" -> "dfa_s2" [label="a"]
+	"dfa_s7" -> "dfa_s2" [label="a"]
+	"dfa_s7" -> "dfa_s3" [label="b"]
+	"dfa_s2" -> "dfa_s7" [label="b"]
+	"dfa_s3" -> "dfa_s2" [label="a"]
+	"dfa_s3" -> "dfa_s3" [label="b"]
+	"dfa_s1" -> "dfa_s3" [label="b"]
+	"dfa_s1" -> "dfa_s2" [label="a"]
+}

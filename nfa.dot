@@ -1,0 +1,15 @@
+digraph FA {
+	rankdir=LR
+node [shape = doublecircle]; nfa_s1 nfa_s9 ;
+node [shape = circle];
+	"nfa_s8" -> "nfa_s9" [label="b"]
+	"nfa_s7" -> "nfa_s8" [label="a"]
+	"nfa_s2" -> "nfa_s7" [label="epsilon"]
+	"nfa_s4" -> "nfa_s2" [label="epsilon"]
+	"nfa_s6" -> "nfa_s4" [label="b"]
+	"nfa_s3" -> "nfa_s6" [label="epsilon"]
+	"nfa_s5" -> "nfa_s4" [label="a"]
+	"nfa_s3" -> "nfa_s5" [label="epsilon"]
+	"nfa_s2" -> "nfa_s3" [label="epsilon"]
+	"nfa_s1" -> "nfa_s2" [label="epsilon"]
+}
