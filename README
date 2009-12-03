@@ -1,17 +1,3 @@
-The idea is to transform an HMM given a regular expression.
-
-We need some notion of the transitions and states. We do not 
-care about emissions.
-
-I would be neat to do this using CHR. 
-
-So, for instance, we might have that
-
-trans(s1, s2, 0.4) 
-
-Something that transforms a regular expression to a DFA. Reread relevant chapters from Torben Mogensens bog at home..  or possible on screen
-
-
-CHR rules that convert the original DFA and the new regex DFA to a new DFA.
-
-
+In this program a regular expression constraint is applied to the allowed sequence
+of hidden states of an given HMM and the HMM is transformed to a new HMM where the structure
+only allows transitions which are valid with regard to the specified regular expression. 
